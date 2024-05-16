@@ -28,8 +28,6 @@ export const Route = createFileRoute("/")({
 
 function Index() {
   const { greetings, slowData } = Route.useLoaderData();
-  console.log("data", greetings);
-
   return (
     <div className="p-2">
       <h2>{greetings?.greetings}!</h2>

@@ -12,6 +12,7 @@
 
 import { Route as rootRoute } from './routes/__root'
 import { Route as TestImport } from './routes/test'
+import { Route as IndexWithQueryLoaderImport } from './routes/index-with-query-loader'
 import { Route as AboutImport } from './routes/about'
 import { Route as IndexImport } from './routes/index'
 
@@ -19,6 +20,11 @@ import { Route as IndexImport } from './routes/index'
 
 const TestRoute = TestImport.update({
   path: '/test',
+  getParentRoute: () => rootRoute,
+} as any)
+
+const IndexWithQueryLoaderRoute = IndexWithQueryLoaderImport.update({
+  path: '/index-with-query-loader',
   getParentRoute: () => rootRoute,
 } as any)
 
@@ -50,6 +56,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof AboutImport
       parentRoute: typeof rootRoute
     }
+    '/index-with-query-loader': {
+      id: '/index-with-query-loader'
+      path: '/index-with-query-loader'
+      fullPath: '/index-with-query-loader'
+      preLoaderRoute: typeof IndexWithQueryLoaderImport
+      parentRoute: typeof rootRoute
+    }
     '/test': {
       id: '/test'
       path: '/test'
@@ -65,6 +78,7 @@ declare module '@tanstack/react-router' {
 export const routeTree = rootRoute.addChildren({
   IndexRoute,
   AboutRoute,
+  IndexWithQueryLoaderRoute,
   TestRoute,
 })
 
